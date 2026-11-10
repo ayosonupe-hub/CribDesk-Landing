@@ -211,11 +211,11 @@ export function JoinedPage({ code }: { code: string }) {
       </div>
       <SharedSections />
       {member && (
-        <section className="bottom-cta">
+        <section className="bottom-cta" aria-labelledby="climb-title">
           <div className="container bottom-cta-inner">
             <div>
               <span className="section-kicker light">KEEP CLIMBING</span>
-              <h2>
+              <h2 id="climb-title">
                 You're #{member.position.toLocaleString()}. Let's get you
                 higher.
               </h2>

@@ -74,7 +74,7 @@ const faqs = [
 
 function Integrations() {
   return (
-    <div className="integrations">
+    <div className="integrations" role="region" aria-label="Integrations">
       <div className="container integrations-inner">
         <span>Plugs into what you already run on</span>
         <strong>
@@ -343,11 +343,15 @@ export function SharedSections() {
   return (
     <>
       <Integrations />
-      <section className="day-section section-pad" id="day">
+      <section
+        className="day-section section-pad"
+        id="day"
+        aria-labelledby="day-title"
+      >
         <div className="container">
           <div className="section-heading centered">
             <span className="section-kicker">A DAY WITH CRIBDESK</span>
-            <h2>
+            <h2 id="day-title">
               From first coffee to final follow-up. <em>One app.</em>
             </h2>
             <p>
@@ -370,11 +374,15 @@ export function SharedSections() {
           </div>
         </div>
       </section>
-      <section className="features-section section-pad" id="features">
+      <section
+        className="features-section section-pad"
+        id="features"
+        aria-labelledby="features-title"
+      >
         <div className="container">
           <div className="section-heading centered">
             <span className="section-kicker">WHAT'S INSIDE</span>
-            <h2>
+            <h2 id="features-title">
               A whole team's output. <em>One login.</em>
             </h2>
           </div>
@@ -395,7 +403,7 @@ export function SharedSections() {
           </div>
         </div>
       </section>
-      <section className="mobile-section">
+      <section className="mobile-section" aria-labelledby="mobile-title">
         <div className="container mobile-inner">
           <div className="mobile-photo">
             <Image
@@ -415,7 +423,7 @@ export function SharedSections() {
           </div>
           <div className="mobile-copy">
             <span className="section-kicker">BUILT FOR YOUR PHONE FIRST</span>
-            <h2>
+            <h2 id="mobile-title">
               Lives on your home screen. <em>Works in the driveway.</em>
             </h2>
             <p>
@@ -440,11 +448,15 @@ export function SharedSections() {
           </div>
         </div>
       </section>
-      <section className="faq-section section-pad" id="faq">
+      <section
+        className="faq-section section-pad"
+        id="faq"
+        aria-labelledby="faq-title"
+      >
         <div className="container faq-grid">
           <div className="section-heading">
             <span className="section-kicker">FAQ</span>
-            <h2>
+            <h2 id="faq-title">
               Questions agents <em>ask us.</em>
             </h2>
             <p>

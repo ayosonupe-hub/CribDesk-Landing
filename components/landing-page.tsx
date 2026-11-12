@@ -4050,107 +4050,36 @@ export function LandingPage({ referralCode }: { referralCode?: string }) {
                 >
                   {"NATIVE APPS \u00b7 COMING SOON"}
                 </span>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-                  <a
-                    href="#top"
-                    aria-label="Download on the App Store, coming soon"
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    alignItems: "center",
+                    gap: "16px",
+                  }}
+                >
+                  <img
+                    src="/images/badges/app-store.svg"
+                    alt="Download on the App Store — coming soon"
+                    width={161.55}
+                    height={54}
+                    style={{ display: "block", height: "54px", width: "auto" }}
+                  />
+                  {/* Google's official PNG includes 41px of transparent padding.
+                      Offset that padding to align both visible badges at 54px. */}
+                  <img
+                    src="/images/badges/google-play.png"
+                    alt="Get it on Google Play — coming soon"
+                    width={207.64}
+                    height={80.36}
                     style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "10px",
-                      height: "54px",
-                      padding: "0px 20px 0px 14px",
-                      background: "rgb(0, 0, 0)",
-                      border: "1px solid rgb(166, 166, 166)",
-                      borderRadius: "12px",
-                      color: "rgb(255, 255, 255)",
-                      textDecoration: "none",
+                      display: "block",
+                      width: "207.64px",
+                      height: "80.36px",
+                      maxWidth: "none",
+                      margin: "-13.18px",
                     }}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <span
-                      aria-hidden="true"
-                      style={{
-                        width: "26px",
-                        height: "26px",
-                        borderRadius: "6px",
-                        border: "1.5px dashed rgba(255, 255, 255, 0.6)",
-                        boxSizing: "border-box",
-                      }}
-                    ></span>
-                    <span
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        lineHeight: "1.05",
-                      }}
-                    >
-                      <span
-                        style={{ fontSize: "10px", letterSpacing: "0.02em" }}
-                      >
-                        {"Download on the"}
-                      </span>
-                      <span
-                        style={{
-                          fontSize: "20px",
-                          fontWeight: "600",
-                          letterSpacing: "-0.01em",
-                        }}
-                      >
-                        {"App Store"}
-                      </span>
-                    </span>
-                  </a>
-                  <a
-                    href="#top"
-                    aria-label="Get it on Google Play, coming soon"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "10px",
-                      height: "54px",
-                      padding: "0px 20px 0px 14px",
-                      background: "rgb(0, 0, 0)",
-                      border: "1px solid rgb(166, 166, 166)",
-                      borderRadius: "12px",
-                      color: "rgb(255, 255, 255)",
-                      textDecoration: "none",
-                    }}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <span
-                      aria-hidden="true"
-                      style={{
-                        width: "26px",
-                        height: "26px",
-                        borderRadius: "6px",
-                        border: "1.5px dashed rgba(255, 255, 255, 0.6)",
-                        boxSizing: "border-box",
-                      }}
-                    ></span>
-                    <span
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        lineHeight: "1.05",
-                      }}
-                    >
-                      <span
-                        style={{ fontSize: "10px", letterSpacing: "0.02em" }}
-                      >
-                        {"GET IT ON"}
-                      </span>
-                      <span
-                        style={{
-                          fontSize: "20px",
-                          fontWeight: "600",
-                          letterSpacing: "-0.01em",
-                        }}
-                      >
-                        {"Google Play"}
-                      </span>
-                    </span>
-                  </a>
+                  />
                 </div>
               </div>
               <a
@@ -4636,7 +4565,7 @@ export function LandingPage({ referralCode }: { referralCode?: string }) {
                 }}
               >
                 {
-                  "Every plan starts with a 14-day free trial. Waitlist members who invite five agents lock in founding-member pricing at [FOUNDING PRICE]/month."
+                  "Every plan starts with a 14-day free trial. Waitlist members who invite five agents lock in founding-member pricing at $99/month."
                 }
               </p>
             </details>

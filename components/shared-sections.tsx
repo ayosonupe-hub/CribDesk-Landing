@@ -69,7 +69,7 @@ const faqs = [
   {
     question: "What will it cost?",
     answer:
-      "Pricing hasn't been announced yet. Agents who refer five others can lock in founding-member pricing when it becomes available.",
+      "Every plan starts with a 14-day free trial. Waitlist members who invite five agents lock in founding-member pricing at $99/month.",
   },
 ];
 

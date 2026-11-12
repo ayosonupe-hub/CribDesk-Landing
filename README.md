@@ -48,3 +48,12 @@ npm run build
 ```
 
 The integration test starts an isolated local mock API and Next.js server. It checks the real route handler without creating signups or sending email on the live backend.
+
+### Store badge artwork
+
+The native-app section uses unmodified official badges, displayed beneath the “Coming soon” label:
+
+- [Apple App Store badge](https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg), from [Apple’s marketing resources](https://developer.apple.com/app-store/marketing/guidelines/).
+- [Google Play badge](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png), from [Google Play’s brand resources](https://developer.android.com/distribute/marketing-tools/brand-guidelines).
+
+The badges are informational until the native apps have published store listings.

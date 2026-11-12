@@ -4565,7 +4565,7 @@ export function LandingPage({ referralCode }: { referralCode?: string }) {
                 }}
               >
                 {
-                  "Every plan starts with a 14-day free trial. Waitlist members who invite five agents lock in founding-member pricing at [FOUNDING PRICE]/month."
+                  "Every plan starts with a 14-day free trial. Waitlist members who invite five agents lock in founding-member pricing at $99/month."
                 }
               </p>
             </details>

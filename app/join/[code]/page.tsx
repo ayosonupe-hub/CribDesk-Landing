@@ -12,5 +12,5 @@ export default async function ReferralPage({
   params: Promise<{ code: string }>;
 }) {
   const { code } = await params;
-  return <LandingPage referralCode={code.toUpperCase()} />;
+  return <LandingPage referralCode={code} />;
 }

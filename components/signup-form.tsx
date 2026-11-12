@@ -4,6 +4,9 @@ import { useState, type FormEvent } from "react";
 import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 
+import { signupPayload } from "@/lib/signup-payload";
+import { SignupHoneypot } from "./signup-honeypot";
+
 export function SignupForm({
   referralCode,
   compact = false,
@@ -18,13 +21,21 @@ export function SignupForm({
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (loading) return;
+    const form = event.currentTarget;
     setError("");
     setLoading(true);
     try {
       const response = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ email, referralCode }),
+        body: JSON.stringify(
+          signupPayload(
+            email,
+            String(new FormData(form).get("website") || ""),
+            referralCode,
+          ),
+        ),
       });
       const data: { code?: string; error?: string } = await response.json();
       if (!response.ok || !data.code) {
@@ -55,7 +66,7 @@ export function SignupForm({
         type="email"
         autoComplete="email"
         required
-        maxLength={254}
+        maxLength={320}
         placeholder="you@yourbrokerage.com"
         value={email}
         onChange={(event) => setEmail(event.target.value)}
@@ -76,6 +87,7 @@ export function SignupForm({
           {error}
         </p>
       )}
+      <SignupHoneypot />
     </form>
   );
 }

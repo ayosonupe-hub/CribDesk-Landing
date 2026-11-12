@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { Bricolage_Grotesque, Inter } from "next/font/google";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
+import "./reference.css";
 
 const displayFont = Bricolage_Grotesque({
+  axes: ["opsz"],
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",

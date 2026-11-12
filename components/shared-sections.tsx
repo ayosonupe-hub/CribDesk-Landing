@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { BrandMark } from "./brand-mark";
 import {
   ArrowRight,
   CalendarDays,
@@ -486,12 +487,7 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="container footer-inner">
         <div className="footer-brand">
-          <span className="brand-mark small-mark" aria-hidden="true">
-            <span />
-            <span />
-            <span />
-            <span />
-          </span>
+          <BrandMark className="brand-mark" />
           <strong>
             Crib<span>Desk</span>
           </strong>

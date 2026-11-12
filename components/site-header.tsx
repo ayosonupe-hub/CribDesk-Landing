@@ -3,16 +3,12 @@
 import { useState } from "react";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import Link from "next/link";
+import { BrandMark } from "./brand-mark";
 
 export function Logo() {
   return (
     <Link className="brand" href="/" aria-label="CribDesk home">
-      <span className="brand-mark" aria-hidden="true">
-        <span />
-        <span />
-        <span />
-        <span />
-      </span>
+      <BrandMark className="brand-mark" />
       <span>
         Crib<span>Desk</span>
       </span>

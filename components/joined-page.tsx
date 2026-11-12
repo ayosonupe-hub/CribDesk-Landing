@@ -13,23 +13,12 @@ import Link from "next/link";
 import { SiteHeader } from "./site-header";
 import { SharedSections, SiteFooter } from "./shared-sections";
 
-type Member = {
-  code: string;
-  position: number;
-  ahead: number;
-  invites: number;
-  joinedAt: string;
-};
+import type { WaitlistMember } from "@/lib/waitlist";
 
 export function JoinedPage({ code }: { code: string }) {
-  const [member, setMember] = useState<Member | null>(null);
+  const [member, setMember] = useState<WaitlistMember | null>(null);
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
-  const origin =
-    typeof window !== "undefined"
-      ? window.location.origin
-      : "https://cribdesk.ai";
-
   useEffect(() => {
     if (!code) return;
     fetch(`/api/waitlist?code=${encodeURIComponent(code)}`, {
@@ -38,7 +27,7 @@ export function JoinedPage({ code }: { code: string }) {
       .then(async (response) => {
         if (!response.ok)
           throw new Error("We couldn't find your place in line.");
-        return response.json() as Promise<Member>;
+        return response.json() as Promise<WaitlistMember>;
       })
       .then(setMember)
       .catch(() =>
@@ -46,10 +35,8 @@ export function JoinedPage({ code }: { code: string }) {
       );
   }, [code]);
 
-  const link = member ? `${origin}/join/${member.code}` : "";
-  const message = member
-    ? `Found something for us: CribDesk answers leads in your voice and turns one listing into content for 14 channels. Join the waitlist with my link and we both move up: ${link}`
-    : "";
+  const link = member?.shareUrl || "";
+  const message = member?.shareMessage || "";
   const displayedError = !code ? "We couldn't find your place in line." : error;
 
   async function copyLink() {
@@ -79,7 +66,7 @@ export function JoinedPage({ code }: { code: string }) {
   }
 
   return (
-    <>
+    <div className="legacy-ui">
       <div className="hero-shell joined-shell">
         <SiteHeader joined />
         <main>
@@ -117,15 +104,15 @@ export function JoinedPage({ code }: { code: string }) {
                 <div className="stats-grid">
                   <div>
                     <span>Agents ahead of you</span>
-                    <strong>{member.ahead.toLocaleString()}</strong>
+                    <strong>{member.aheadOfYou.toLocaleString()}</strong>
                   </div>
                   <div>
                     <span>Agents you&apos;ve invited</span>
-                    <strong>{member.invites}</strong>
+                    <strong>{member.invitedCount}</strong>
                   </div>
                   <div>
                     <span>Each invite moves you</span>
-                    <strong>1,000 spots</strong>
+                    <strong>{member.inviteBoost.toLocaleString()} spots</strong>
                   </div>
                 </div>
                 <Link className="different-email" href="/">
@@ -136,7 +123,7 @@ export function JoinedPage({ code }: { code: string }) {
                 <h2>Jump the line.</h2>
                 <p>
                   Share your personal link. When an agent joins with it, you
-                  both move up.
+                  move up.
                 </p>
                 <label htmlFor="ref-link">Your invite link</label>
                 <div className="copy-row">
@@ -152,40 +139,34 @@ export function JoinedPage({ code }: { code: string }) {
                 </div>
                 <div className="invite-progress">
                   <span>Agents joined with your link</span>
-                  <strong>{member.invites} / 5</strong>
+                  <strong>
+                    {member.invitedCount} / {member.milestoneMax}
+                  </strong>
                   <div className="progress-track">
                     <span
                       style={{
-                        width: `${Math.min(100, member.invites * 20)}%`,
+                        width: `${Math.min(100, member.milestoneMax > 0 ? (member.invitedCount / member.milestoneMax) * 100 : 0)}%`,
                       }}
                     />
                   </div>
                 </div>
                 <div className="reward-list">
-                  <div>
-                    <b>1</b>
-                    <span>
-                      <strong>Move up 1,000 spots</strong>
-                      <small>for every agent who joins with your link</small>
-                    </span>
-                    <Check size={16} />
-                  </div>
-                  <div>
-                    <b>3</b>
-                    <span>
-                      <strong>Skip to the first launch wave</strong>
-                      <small>get in before the public opening</small>
-                    </span>
-                    <Check size={16} />
-                  </div>
-                  <div>
-                    <b>5</b>
-                    <span>
-                      <strong>Lock in founding-member pricing</strong>
-                      <small>for as long as you stay subscribed</small>
-                    </span>
-                    <Check size={16} />
-                  </div>
+                  {member.milestones.map((milestone) => (
+                    <div key={milestone.threshold}>
+                      <b>{milestone.threshold}</b>
+                      <span>
+                        <strong>{milestone.reward}</strong>
+                        <small>
+                          {milestone.unlocked
+                            ? "Unlocked"
+                            : `${milestone.threshold} successful invite${milestone.threshold === 1 ? "" : "s"}`}
+                        </small>
+                      </span>
+                      {milestone.unlocked && (
+                        <Check size={16} aria-label="Unlocked" />
+                      )}
+                    </div>
+                  ))}
                 </div>
                 <div className="share-buttons">
                   <a href={`sms:?&body=${encodeURIComponent(message)}`}>
@@ -220,7 +201,8 @@ export function JoinedPage({ code }: { code: string }) {
                 higher.
               </h2>
               <p>
-                Each agent who joins with your link moves you up 1,000 spots.
+                Each agent who joins with your link moves you up{" "}
+                {member.inviteBoost.toLocaleString()} spots.
               </p>
             </div>
             <button className="bottom-copy" onClick={copyLink} type="button">
@@ -230,6 +212,6 @@ export function JoinedPage({ code }: { code: string }) {
         </section>
       )}
       <SiteFooter />
-    </>
+    </div>
   );
 }

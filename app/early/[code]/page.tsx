@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { LandingPage } from "@/components/landing-page";
+import { MotionLanding } from "@/components/motion-landing";
 
 export const metadata: Metadata = {
   title: "Join the CribDesk waitlist",
@@ -12,5 +12,5 @@ export default async function ReferralPage({
   params: Promise<{ code: string }>;
 }) {
   const { code } = await params;
-  return <LandingPage referralCode={code} />;
+  return <MotionLanding referralCode={code} />;
 }

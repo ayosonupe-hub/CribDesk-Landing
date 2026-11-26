@@ -63,6 +63,7 @@ export function SignupForm({
       </label>
       <input
         id={compact ? "email-bottom" : "email-hero"}
+        name="email"
         type="email"
         autoComplete="email"
         required

@@ -1,0 +1,422 @@
+.dialog {
+  position: fixed;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  height: 100svh;
+  max-width: none;
+  max-height: none;
+  overflow: hidden;
+  background: #e9e7e2;
+  color: #173f31;
+  font-family: var(--font-body), sans-serif;
+}
+.dialog *,
+.dialog *::before,
+.dialog *::after {
+  box-sizing: border-box;
+}
+.dialog::backdrop {
+  background: #152c24;
+}
+.dialog[open] {
+  animation: enterHome 800ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.dialog button {
+  font: inherit;
+  cursor: pointer;
+}
+.dialog button:disabled {
+  cursor: default;
+  opacity: 0.65;
+}
+.dialog :focus-visible {
+  outline: 3px solid #0d9373;
+  outline-offset: 4px;
+}
+.stage,
+.scene,
+.photoFrame {
+  position: absolute;
+  inset: 0;
+}
+.stage {
+  isolation: isolate;
+  overflow: hidden;
+}
+.photoFrame {
+  overflow: hidden;
+  animation: photoArrival 1.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.showingPhoto {
+  object-fit: cover;
+  object-position: var(--photo-position, 53% 42%);
+  opacity: 0;
+  transform: scale(1.035);
+  transition:
+    opacity 850ms ease,
+    transform 4s ease;
+}
+.showingPhoto[data-active="true"] {
+  opacity: 1;
+  transform: scale(1);
+}
+.photoBackdrop {
+  display: none;
+}
+.stage::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    #ffffff70,
+    transparent 20%,
+    transparent 65%,
+    #14271f33
+  );
+}
+.advanceSurface {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: 0;
+}
+.advanceSurface:focus-visible {
+  outline-offset: -5px;
+}
+.exit {
+  position: absolute;
+  top: max(28px, env(safe-area-inset-top));
+  right: max(32px, env(safe-area-inset-right));
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 13px 19px;
+  border: 1px solid #ffffffb3;
+  border-radius: 100px;
+  background: #fffffff2;
+  color: #173f31;
+  box-shadow: 0 3px 18px #142a2420;
+  font-size: 13px !important;
+}
+.exit:hover {
+  background: #fff;
+}
+.place {
+  position: absolute;
+  top: 32px;
+  left: 36px;
+  z-index: 2;
+  pointer-events: none;
+  display: grid;
+  gap: 8px;
+}
+.place span {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  font-weight: 600;
+}
+.place strong {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+.conversation {
+  position: absolute;
+  z-index: 2;
+  top: var(--card-top);
+  left: var(--card-left);
+  width: min(420px, 29vw);
+  padding: 22px 28px;
+  background: #fbfcf4ed;
+  backdrop-filter: blur(14px);
+  border: 1px solid #fff;
+  border-radius: 18px;
+  box-shadow: 0 14px 45px #213b3020;
+  cursor: pointer;
+}
+.conversation::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #fbfcf4;
+  transform: rotate(45deg);
+  border-radius: 2px;
+}
+.conversation[data-tail="right"]::before {
+  right: -9px;
+  top: var(--pointer);
+}
+.conversation[data-tail="top"]::before {
+  top: -9px;
+  left: var(--pointer);
+}
+.conversation[data-tail="bottom"]::before {
+  bottom: -9px;
+  left: var(--pointer);
+}
+.captionMeta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  color: #5f7266;
+  font-size: 11px;
+}
+.captionMeta span:first-child {
+  font-weight: 600;
+  color: #254b37;
+}
+.conversation p {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(20px, 1.7vw, 26px);
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  animation: captionIn 550ms ease both;
+}
+.advanceHint {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  margin-top: 15px;
+  font-size: 11px;
+  color: #627569;
+}
+.stageControls {
+  position: absolute;
+  z-index: 3;
+  bottom: max(28px, env(safe-area-inset-bottom));
+  left: 50%;
+  width: min(760px, calc(100% - 64px));
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.stageControls > button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: 0;
+  border-radius: 100px;
+  background: #ffffffe3;
+  color: #32533c;
+  padding: 11px 15px;
+  font-size: 12px;
+}
+.frameSteps {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  max-width: 270px;
+}
+.frameSteps button {
+  border: 0;
+  padding: 15px 0;
+  flex: 1;
+  background: transparent;
+}
+.frameSteps button span {
+  display: block;
+  width: 100%;
+  height: 4px;
+  border-radius: 10px;
+  background: #ffffffc4;
+  box-shadow: 0 1px 5px #173f3130;
+}
+.frameSteps button[aria-current="step"] span {
+  background: #173f31;
+}
+.frameSteps button[data-complete="true"] span {
+  background: #759589;
+}
+.loading,
+.fallback {
+  position: absolute;
+  inset: 0;
+  background: #e9e7e2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px;
+}
+.loading {
+  z-index: 2;
+  font-size: 14px;
+}
+.loading span {
+  font-size: 70px;
+}
+.fallback strong {
+  font-family: var(--font-display);
+  font-size: 36px;
+}
+.entryWash {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 15%, #f2f5e8 90%);
+  z-index: 2;
+  pointer-events: none;
+  animation: arrive 1.7s ease both;
+}
+@keyframes enterHome {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+    filter: blur(9px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+@keyframes photoArrival {
+  from {
+    transform: scale(1.16);
+    filter: blur(6px);
+  }
+  to {
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+@keyframes arrive {
+  from {
+    opacity: 1;
+    transform: scale(0.75);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+}
+@keyframes captionIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.dialog[data-still="true"],
+.dialog[data-still="true"] * {
+  animation: none !important;
+}
+.dialog[data-still="true"] .showingPhoto {
+  transition: none;
+}
+.dialog[data-still="true"] .entryWash {
+  display: none;
+}
+@media (max-width: 700px) {
+  .photoBackdrop {
+    display: block;
+    filter: blur(22px) brightness(0.8);
+    transform: scale(1.12) !important;
+  }
+  .showingPhoto:not(.photoBackdrop) {
+    top: 8svh !important;
+    height: 64svh !important;
+    object-position: var(--mobile-photo-position, 50% 42%);
+    mask-image: linear-gradient(transparent, #000 8%, #000 86%, transparent);
+  }
+  .exit {
+    top: max(16px, env(safe-area-inset-top));
+    right: 16px;
+    font-size: 11px !important;
+    padding: 11px 13px;
+  }
+  .place {
+    top: 30px;
+    left: 16px;
+  }
+  .place span {
+    font-size: 8px;
+  }
+  .place strong {
+    display: none;
+  }
+  .conversation {
+    width: 73%;
+    left: var(--mobile-left);
+    top: var(--mobile-top);
+    padding: 16px;
+    border-radius: 15px;
+  }
+  .conversation p {
+    font-size: 19px;
+  }
+  .conversation::before {
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+  }
+  .conversation[data-mobile-tail="top"]::before {
+    top: -9px;
+    left: var(--mobile-pointer);
+    bottom: auto;
+    right: auto;
+  }
+  .conversation[data-mobile-tail="bottom"]::before {
+    bottom: -9px;
+    left: var(--mobile-pointer);
+    top: auto;
+    right: auto;
+  }
+  .captionMeta {
+    font-size: 10px;
+  }
+  .stageControls {
+    width: calc(100% - 32px);
+    gap: 10px;
+    bottom: max(24px, env(safe-area-inset-bottom));
+  }
+  .stageControls > button {
+    font-size: 10px;
+    padding: 9px 11px;
+  }
+}
+@media (max-height: 500px) and (min-width: 701px) {
+  .conversation {
+    top: auto;
+    bottom: 76px;
+    padding: 14px 20px;
+  }
+  .conversation p {
+    font-size: 22px;
+  }
+  .stageControls {
+    bottom: 15px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dialog,
+  .dialog * {
+    animation: none !important;
+  }
+  .showingPhoto {
+    transition: none;
+  }
+  .entryWash {
+    display: none;
+  }
+}

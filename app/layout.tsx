@@ -19,11 +19,11 @@ const bodyFont = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "CribDesk — Your AI co-agent for real estate",
+  title: "CribDesk — A little more possible",
   description:
-    "Team-level follow-up for solo agents. Join the CribDesk waitlist and be first to meet the AI co-agent built for your whole workday.",
+    "You show the homes. Build the relationships. Let your AI co-agent help with what comes next. Join the CribDesk waitlist.",
   openGraph: {
-    title: "CribDesk — Team-level follow-up for solo agents",
+    title: "CribDesk — A little more possible",
     description:
       "Respond to leads, capture showings and write listing content in your voice.",
     type: "website",

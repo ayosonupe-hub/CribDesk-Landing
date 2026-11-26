@@ -1,0 +1,374 @@
+.demo {
+  padding: 24px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: 0 16px 48px #203c2f0a;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+.demo .header h2 {
+  font-size: 20px;
+  line-height: 26px;
+}
+.header p {
+  font-size: 12px;
+  line-height: 20px;
+}
+.sequence {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.stage {
+  animation: recordingCycle 21s cubic-bezier(0.2, 0.7, 0.2, 1) infinite both;
+  animation-play-state: paused;
+}
+.demo[data-playing="true"]
+  :is(.stage, .briefRow, .word, .waveform i, .transcribing, .transcribed) {
+  animation-play-state: running;
+}
+.demo .label {
+  font-size: 11px;
+  line-height: 18px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+.recording {
+  padding: 20px;
+  border-radius: 16px 16px 4px 16px;
+  background: var(--green);
+  color: white;
+}
+.recording .label {
+  color: var(--mint);
+  margin-bottom: 10px;
+}
+.recording blockquote {
+  font-size: 21px;
+  line-height: 27px;
+}
+.audio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  font-size: 11px;
+  color: var(--mint);
+}
+.waveform {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  height: 28px;
+  margin-left: auto;
+  margin-right: 8px;
+}
+.waveform i {
+  width: 3px;
+  border-radius: 4px;
+  background: currentColor;
+  animation: waveformCycle 21s ease-in-out infinite both;
+  animation-play-state: paused;
+}
+.brief {
+  animation-name: briefCycle;
+  padding: 0 4px;
+}
+.demo h3 {
+  font-size: 20px;
+  line-height: 26px;
+  margin-top: 6px;
+}
+.brief dl {
+  margin: 12px 0 0;
+  font-size: 13px;
+  line-height: 20px;
+}
+.brief dl > div {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+}
+.brief dl > div:last-child {
+  border-bottom: 0;
+}
+.briefRow {
+  --row-start: 27.857%;
+  --row-end: 29.524%;
+  animation: briefRowReveal 21s
+    linear(0 0%, 0 var(--row-start), 1 var(--row-end), 1 100%) infinite both;
+  animation-play-state: paused;
+}
+.briefRow:nth-child(2) {
+  --row-start: 34.524%;
+  --row-end: 36.19%;
+}
+.briefRow:nth-child(3) {
+  --row-start: 41.19%;
+  --row-end: 42.857%;
+}
+@keyframes briefRowReveal {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.brief dt {
+  color: var(--body);
+}
+.brief dd {
+  margin: 0;
+  font-weight: 500;
+}
+.draft {
+  animation-name: draftCycle;
+  padding: 18px;
+  border: 1px solid #d7e5d9;
+  background: #f1f7f0;
+  border-radius: 4px 16px 16px;
+}
+.demo .message {
+  font-size: 15px;
+  line-height: 23px;
+  color: var(--ink);
+  margin-top: 10px;
+}
+.demo .draftStatus {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  font-size: 11px;
+  line-height: 18px;
+  color: var(--green);
+  font-weight: 600;
+}
+.demo .outcome {
+  animation-name: outcomeCycle;
+  font-size: 12px;
+  line-height: 19px;
+  font-weight: 500;
+  color: var(--green);
+}
+.controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  border-top: 1px solid var(--border);
+  padding-top: 8px;
+  font-size: 10px;
+  color: var(--body);
+}
+.demo .controls button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 44px;
+  padding: 6px;
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  color: var(--green);
+  font-size: 11px;
+}
+.controls button:hover {
+  background: var(--paper);
+}
+/* One 21s clock: transcript 0.8–4.16s, brief 5.2s,
+   summary rows 5.85 / 7.25 / 8.65s (350ms reveals), draft 9.8s, takeaway 12s.
+   Every animation pauses together and holds the finished result until 20.04s. */
+@keyframes recordingCycle {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  3.048%,
+  95.429% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  98.476% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+@keyframes briefCycle {
+  0%,
+  24.762%,
+  100% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  27.81%,
+  95.429% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  98.476% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+@keyframes draftCycle {
+  0%,
+  46.667%,
+  100% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  49.714%,
+  95.429% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  98.476% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+@keyframes outcomeCycle {
+  0%,
+  57.143%,
+  100% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  60.19%,
+  95.429% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  98.476% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+.screenReaderText {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.word {
+  animation: wordCycle 21s
+    linear(0 0%, 0 var(--reveal-at), 1 var(--reveal-at), 1 100%) infinite both;
+  animation-play-state: paused;
+}
+.audioStatus {
+  display: grid;
+}
+.audioStatus > span {
+  grid-area: 1 / 1;
+}
+.transcribing,
+.transcribed {
+  animation: transcriptionStatus 21s steps(1, end) infinite both;
+  animation-play-state: paused;
+}
+.transcribed {
+  animation-name: transcriptReady;
+}
+@keyframes wordCycle {
+  from {
+    opacity: 0;
+    visibility: hidden;
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+@keyframes waveformCycle {
+  0%,
+  3% {
+    transform: scaleY(0.25);
+  }
+  22%,
+  100% {
+    transform: scaleY(1);
+  }
+  4%,
+  8%,
+  12%,
+  16%,
+  20% {
+    transform: scaleY(var(--peak));
+  }
+  6%,
+  10%,
+  14%,
+  18% {
+    transform: scaleY(var(--dip));
+  }
+}
+@keyframes transcriptionStatus {
+  0% {
+    opacity: 1;
+  }
+  22%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes transcriptReady {
+  0% {
+    opacity: 0;
+  }
+  22%,
+  100% {
+    opacity: 1;
+  }
+}
+@media (max-width: 900px) {
+  .demo {
+    padding: 20px;
+  }
+  .recording {
+    padding: 16px;
+  }
+  .recording blockquote {
+    font-size: 19px;
+    line-height: 25px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stage,
+  .briefRow,
+  .word,
+  .waveform i,
+  .transcribing,
+  .transcribed {
+    animation: none;
+  }
+  .transcribing {
+    opacity: 0;
+  }
+  .transcribed {
+    opacity: 1;
+  }
+  .controls {
+    display: none;
+  }
+}

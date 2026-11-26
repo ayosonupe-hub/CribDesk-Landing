@@ -1,0 +1,30 @@
+{
+  "showing-real-people.jpg": {
+    "photographer": "RDNE Stock project",
+    "source": "https://www.pexels.com/photo/a-woman-in-black-long-sleeves-showing-the-property-to-the-man-8293739/",
+    "license": "https://www.pexels.com/license/",
+    "downloaded": "2026-11-26",
+    "notes": "Original photograph, locally hosted. Used as illustrative stock photography, not a customer endorsement. Color unaltered; responsive crop and subtle neutral UI gradient applied in CSS."
+  },
+  "showing-real-people-close.jpg": {
+    "photographer": "RDNE Stock project",
+    "source": "https://www.pexels.com/photo/a-real-estate-agent-giving-a-house-tour-to-a-client-8292816/",
+    "license": "https://www.pexels.com/license/",
+    "downloaded": "2026-11-26",
+    "notes": "Original photograph, locally hosted. Used as illustrative stock photography, not a customer endorsement. Color unaltered; responsive crop and subtle neutral UI gradient applied in CSS."
+  },
+  "showing-apartment.jpg": {
+    "photographer": "Gustavo Fring",
+    "source": "https://www.pexels.com/photo/a-man-talking-to-his-clients-while-looking-at-the-property-7489096/",
+    "license": "https://www.pexels.com/license/",
+    "downloaded": "2026-11-26",
+    "notes": "Illustrative stock photography. Names and dialogue are fictional; no endorsement implied. Responsive crops use the original photograph."
+  },
+  "showing-new-home.jpg": {
+    "photographer": "Pavel Danilyuk",
+    "source": "https://www.pexels.com/photo/a-real-estate-agent-giving-a-house-tour-to-a-couple-7937361/",
+    "license": "https://www.pexels.com/license/",
+    "downloaded": "2026-11-26",
+    "notes": "Illustrative stock photography. Names and dialogue are fictional; no endorsement implied. Responsive crops use the original photograph."
+  }
+}

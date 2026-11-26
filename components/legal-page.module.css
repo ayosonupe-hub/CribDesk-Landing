@@ -1,0 +1,189 @@
+.page {
+  min-height: 100vh;
+  background: #f5f4ef;
+  color: #1a1a1a;
+  font-family: var(--font-body), Inter, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page *,
+.page *::before,
+.page *::after {
+  box-sizing: border-box;
+}
+
+.page a {
+  color: #2d6a4f;
+  text-underline-offset: 4px;
+}
+
+.page a:focus-visible {
+  outline: 3px solid #2d6a4f;
+  outline-offset: 5px;
+}
+
+.header,
+.footer {
+  width: min(1120px, calc(100% - 48px));
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-block: 28px;
+}
+
+.header {
+  border-bottom: 1px solid #e5e3dc;
+}
+
+.page .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display), sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #1a1a1a;
+}
+
+.back,
+.footer {
+  font-size: 14px;
+}
+
+.main {
+  width: min(820px, calc(100% - 48px));
+  margin-inline: auto;
+  padding-block: 64px 96px;
+}
+
+.kicker {
+  color: #2d6a4f;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 12px;
+  font-weight: 700;
+  margin: 0 0 16px;
+}
+
+.content {
+  font-size: 17px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.content :is(h1, h2, h3) {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  color: #1a1a1a;
+}
+
+.content h1 {
+  margin: 0 0 24px;
+  font-size: clamp(38px, 5vw, 60px);
+}
+
+.content h2 {
+  margin: 48px 0 16px;
+  font-size: clamp(25px, 3vw, 32px);
+}
+
+.content h3 {
+  margin: 28px 0 12px;
+  font-size: 21px;
+}
+
+.content :is(p, ul, ol) {
+  margin: 0 0 20px;
+  color: #474b47;
+}
+
+.content :is(ul, ol) {
+  padding-left: 24px;
+}
+
+.content ul {
+  list-style-type: disc;
+}
+.content ol {
+  list-style-type: decimal;
+}
+.content li {
+  padding-left: 4px;
+  margin-bottom: 8px;
+}
+.content strong {
+  color: #1a1a1a;
+  font-weight: 600;
+}
+.content section + section {
+  margin-top: 32px;
+}
+.content hr {
+  border: 0;
+  border-top: 1px solid #e5e3dc;
+  margin-block: 36px;
+}
+
+.footer {
+  border-top: 1px solid #e5e3dc;
+  color: #606560;
+}
+
+.footer p {
+  margin: 0;
+}
+.footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+}
+
+@media (max-width: 600px) {
+  .header {
+    gap: 12px;
+    padding-block: 22px;
+  }
+  .page .brand {
+    font-size: 22px;
+  }
+  .brand svg {
+    width: 28px;
+    height: auto;
+  }
+  .back {
+    font-size: 13px;
+  }
+  .main {
+    padding-block: 40px 64px;
+  }
+  .content {
+    font-size: 16px;
+  }
+  .footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+@media print {
+  .page {
+    background: white;
+  }
+  .header,
+  .footer {
+    display: none;
+  }
+  .main {
+    width: 100%;
+    padding: 0;
+  }
+  .content :is(h2, h3) {
+    break-after: avoid;
+  }
+}

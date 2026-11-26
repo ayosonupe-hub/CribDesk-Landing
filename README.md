@@ -21,7 +21,7 @@ The browser calls the landing page's `/api/waitlist` server route because the up
 
 ## Waitlist flow
 
-- Both signup forms send `email`, a hidden `website` honeypot, `source: landing-page`, the optional inviter `ref`, and any standard UTM query parameters.
+- Landing-page waitlist buttons open one accessible signup dialog. The signup form sends `email`, a hidden `website` honeypot, `source: landing-page`, the optional inviter `ref`, and any standard UTM query parameters.
 - The API handles duplicate emails and referral credits. New signups return 201; existing signups return 200 and retain their code.
 - `/early/[code]` is the waitlist invite landing page. `/join/[code]` remains a compatibility alias for earlier landing links. `?ref=CODE` is also supported.
 - `/joined?code=CODE` reads the member's position, invite count, boost, rewards, and unlocked milestones from the API.
@@ -49,9 +49,19 @@ npm run build
 
 The integration test starts an isolated local mock API and Next.js server. It checks the real route handler without creating signups or sending email on the live backend.
 
-### Store badge artwork
+### Website design
 
-The native-app section uses unmodified official badges, displayed beneath the “Coming soon” label:
+The main landing page uses the immersive motion design in `components/motion-landing.tsx` and its scoped stylesheet. The Three.js house includes a doorway invitation that opens a fullscreen, six-frame showing with real stock photographs, dialogue beside each speaker, click-to-advance navigation, and optional autoplay. Motion can be paused and respects reduced-motion preferences. Photo credits are recorded in `public/images/photo-credits.json`; names and conversations are illustrative.
+
+`/`, `/early/[code]`, and `/join/[code]` share this design and the existing waitlist integration. `/explore` remains a no-index preview alias. The earlier Figma-based design is retained in `components/landing-page.tsx`, with [desktop](https://www.figma.com/design/0kfNYDmR11tsxt6FwCNocq/CribDesk?node-id=409-13003) and [mobile](https://www.figma.com/design/0kfNYDmR11tsxt6FwCNocq/CribDesk?node-id=409-13317) references. The property photograph in `public/images/showing-home.png` came from the approved Figma frame.
+
+The `/privacy` and `/terms` pages reproduce the published [Manus Privacy Policy](https://cribdesk-oexqzjea.manus.space/privacy) and [Terms of Service](https://cribdesk-oexqzjea.manus.space/terms), including their original wording and dates (October 29, 2026 and May 27, 2026, respectively). They are static server-rendered pages, with shared branding and responsive reading styles in `components/legal-page.tsx` and `components/legal-page.module.css`. The landing footer, signup dialog, and legal-page footer link to these local routes.
+
+Running `npm run dev` serves the current code locally; it does not deploy to Vercel. Existing waitlist API behavior remains active, so use the mock-backed tests for automated signup checks.
+
+### Store badge artwork retained for future use
+
+The repository retains these unmodified official badges from the earlier native-app section:
 
 - [Apple App Store badge](https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg), from [Apple’s marketing resources](https://developer.apple.com/app-store/marketing/guidelines/).
 - [Google Play badge](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png), from [Google Play’s brand resources](https://developer.android.com/distribute/marketing-tools/brand-guidelines).
